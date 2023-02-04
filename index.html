@@ -1,0 +1,51 @@
+<!DOCTYPE html> 
+<html lang="ja">
+    <head>
+        <script language="JavaScript" type="text/javascript" src="jsbn.js"></script>
+        <script language="JavaScript" type="text/javascript" src="random.js"></script>
+        <script language="JavaScript" type="text/javascript" src="hash.js"></script>
+        <script language="JavaScript" type="text/javascript" src="rsa.js"></script>
+        <script language="JavaScript" type="text/javascript" src="aes.js"></script>
+        <script language="JavaScript" type="text/javascript" src="api.js"></script>
+        <meta charset="utf-8">
+        <title></title>
+        <style>
+            html{
+                 font-family:sans-serif;
+            }
+        </style>
+        <script>
+            var pass = "pass";
+            var bits = 1024;
+            var rsakey = cryptico.generateRSAKey(pass, bits);
+            function elm(id){
+                return document.getElementById(id)
+            }
+            function ango(){
+                
+                var public = cryptico.publicKeyString(rsakey);
+                var PlainText = elm("word").value;
+                var EncryptionResult = cryptico.encrypt(PlainText, public);
+                console.log(EncryptionResult)
+                elm("res").innerText = EncryptionResult.cipher
+
+            }
+            function fuku(){
+                var CipherText = elm("word").value;
+                var DecryptionResult = cryptico.decrypt(CipherText, rsakey);
+                console.log(DecryptionResult)
+                elm("res").innerText = DecryptionResult.plaintext
+
+            }
+        </script>
+    </head>
+    <body>
+        <input type="text" id="word">
+        <button id="btn" onclick="ango()">暗号化</button>
+        <button id="fukugo" onclick="fuku()">複合化</button>
+        <p id="res"></p>
+    </body>
+    <script>
+        
+    </script>
+</html>
