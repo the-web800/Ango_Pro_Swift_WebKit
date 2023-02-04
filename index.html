@@ -37,7 +37,7 @@
                 
                 var public = cryptico.publicKeyString(rsakey);
                 var PlainText = elm("word").value;
-                PlainText = Base64.encode(PlainText)
+                PlainText = Base64.encode(PlainText + "ø" + elm("key").value)
                 /*
                 var StringFrom = PlainText; // 変換する文字列
                 var displaceNumber = Number(elm("key").value); // ずらす数
@@ -50,7 +50,7 @@
                     // 変換 
                 };
                 StringAfter = StringAfter.join(''); // 配列の連結*/
-                var EncryptionResult = cryptico.encrypt(PlainText + "ø" + elm("key").value, public);
+                var EncryptionResult = cryptico.encrypt(PlainText, public);
                 
                 
                 elm("res").innerText = EncryptionResult.cipher
