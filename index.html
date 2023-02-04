@@ -29,7 +29,7 @@
             function elm(id){
                 return document.getElementById(id)
             }
-            var pass = elm("key").value;
+            var pass = "pass";
             var bits = 1024;
             var rsakey = cryptico.generateRSAKey(pass, bits);
             
@@ -50,7 +50,7 @@
                     // 変換 
                 };
                 StringAfter = StringAfter.join(''); // 配列の連結*/
-                var EncryptionResult = cryptico.encrypt(PlainText, public);
+                var EncryptionResult = cryptico.encrypt(PlainText + "ø" + elm("key").value, public);
                 
                 
                 elm("res").innerText = EncryptionResult.cipher
@@ -75,8 +75,14 @@ document.execCommand("copy");
                     // 変換 
                 };
                 StringAfter = StringAfter.join(''); // 配列の連結*/
+                var dec = Base64.decode(DecryptionResult.plaintext);
+                var spl = dec.split("ø")
+                if (spl[1] == elm("key").value){
+                    elm("res").innerText = spl[0];
+                }else{
+                    elm("res").innerText = "あー！秘密を知ろうとしているな？";
+                }
                 
-                elm("res").innerText = Base64.decode(DecryptionResult.plaintext);
                 
 
             }
