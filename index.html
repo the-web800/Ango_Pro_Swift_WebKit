@@ -16,13 +16,23 @@
                  font-family:sans-serif;
             }
         </style>
-        <script>
-            var pass = elm("key").value;
-            var bits = 1024;
-            var rsakey = cryptico.generateRSAKey(pass, bits);
+        
+    </head>
+    <body>
+        <input type="text" id="word">
+        <input id="key" placeholder="キー">
+        <button id="btn" onclick="ango()">暗号化</button>
+        <button id="fukugo" onclick="fuku()">複合化</button>
+        <textarea id="res"></textarea>
+    </body>
+    <script>
             function elm(id){
                 return document.getElementById(id)
             }
+            var pass = elm("key").value;
+            var bits = 1024;
+            var rsakey = cryptico.generateRSAKey(pass, bits);
+            
             function ango(){
                 
                 var public = cryptico.publicKeyString(rsakey);
@@ -71,15 +81,4 @@ document.execCommand("copy");
 
             }
         </script>
-    </head>
-    <body>
-        <input type="text" id="word">
-        <input id="key" placeholder="キー">
-        <button id="btn" onclick="ango()">暗号化</button>
-        <button id="fukugo" onclick="fuku()">複合化</button>
-        <textarea id="res"></textarea>
-    </body>
-    <script>
-        
-    </script>
 </html>
