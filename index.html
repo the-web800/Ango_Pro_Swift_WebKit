@@ -8,6 +8,7 @@
         <script language="JavaScript" type="text/javascript" src="rsa.js"></script>
         <script language="JavaScript" type="text/javascript" src="aes.js"></script>
         <script language="JavaScript" type="text/javascript" src="api.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/js-base64@3.7.4/base64.min.js"></script>
         <meta charset="utf-8">
         <title>secret</title>
         <style>
@@ -25,7 +26,9 @@
             function ango(){
                 
                 var public = cryptico.publicKeyString(rsakey);
-                var PlainText = elm("word").value;/*
+                var PlainText = elm("word").value;
+                PlainText = Base64.encode(PlainText)
+                /*
                 var StringFrom = PlainText; // 変換する文字列
                 var displaceNumber = Number(elm("key").value); // ずらす数
                 var StringAfter = [];
@@ -62,7 +65,8 @@ document.execCommand("copy");
                     // 変換 
                 };
                 StringAfter = StringAfter.join(''); // 配列の連結*/
-                elm("res").innerText = DecryptionResult.plaintext;
+                
+                elm("res").innerText = Base64.decode(DecryptionResult.plaintext);
                 
 
             }
