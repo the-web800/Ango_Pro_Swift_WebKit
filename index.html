@@ -40,7 +40,11 @@
                 
                 
                 elm("res").innerText = EncryptionResult.cipher
-
+                var textarea = document.getElementsByTagName("textarea")[0];
+// 文字をすべて選択
+textarea.select();
+// コピー
+document.execCommand("copy");
             }
             function fuku(){
                 var CipherText = elm("word").value;
@@ -67,7 +71,7 @@
         <input id="key" placeholder="キー">
         <button id="btn" onclick="ango()">暗号化</button>
         <button id="fukugo" onclick="fuku()">複合化</button>
-        <p id="res"></p>
+        <textarea id="res"></p>
     </body>
     <script>
         
