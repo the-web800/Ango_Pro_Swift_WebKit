@@ -16,7 +16,7 @@
             }
         </style>
         <script>
-            var pass = "pass";
+            var pass = elm("key").value;
             var bits = 1024;
             var rsakey = cryptico.generateRSAKey(pass, bits);
             function elm(id){
@@ -25,7 +25,7 @@
             function ango(){
                 
                 var public = cryptico.publicKeyString(rsakey);
-                var PlainText = elm("word").value;
+                var PlainText = elm("word").value;/*
                 var StringFrom = PlainText; // 変換する文字列
                 var displaceNumber = Number(elm("key").value); // ずらす数
                 var StringAfter = [];
@@ -36,8 +36,8 @@
                     StringAfter[i] = String.fromCharCode(StringFrom[i].charCodeAt() + displaceNumber);
                     // 変換 
                 };
-                StringAfter = StringAfter.join(''); // 配列の連結
-                var EncryptionResult = cryptico.encrypt(StringAfter, public);
+                StringAfter = StringAfter.join(''); // 配列の連結*/
+                var EncryptionResult = cryptico.encrypt(PlainText, public);
                 
                 
                 elm("res").innerText = EncryptionResult.cipher
@@ -50,7 +50,7 @@ document.execCommand("copy");
             }
             function fuku(){
                 var CipherText = elm("word").value;
-                var DecryptionResult = cryptico.decrypt(CipherText, rsakey);
+                var DecryptionResult = cryptico.decrypt(CipherText, rsakey);/*
                 var StringFrom = DecryptionResult.plaintext; // 変換する文字列
                 var displaceNumber = Number("-" + elm("key").value); // ずらす数
                 var StringAfter = [];
@@ -61,8 +61,8 @@ document.execCommand("copy");
                     StringAfter[i] = String.fromCharCode(StringFrom[i].charCodeAt() + displaceNumber);
                     // 変換 
                 };
-                StringAfter = StringAfter.join(''); // 配列の連結
-                elm("res").innerText = StringAfter
+                StringAfter = StringAfter.join(''); // 配列の連結*/
+                elm("res").innerText = DecryptionResult.plaintext;
                 
 
             }
