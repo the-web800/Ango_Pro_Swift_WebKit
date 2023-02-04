@@ -25,22 +25,46 @@
                 
                 var public = cryptico.publicKeyString(rsakey);
                 var PlainText = elm("word").value;
-                var EncryptionResult = cryptico.encrypt(PlainText, public);
-                console.log(EncryptionResult)
+                var StringFrom = PlainText; // 変換する文字列
+                var displaceNumber = Number(elm("key").value); // ずらす数
+                var StringAfter = [];
+                // 変換後の文字格納変数  
+                StringFrom = StringFrom.split(''); 
+                // 一文字づつに分解、配列化 
+                for(var i=0;i<StringFrom.length;i++){
+                    StringAfter[i] = String.fromCharCode(StringFrom[i].charCodeAt() + displaceNumber);
+                    // 変換 
+                };
+                StringAfter = StringAfter.join(''); // 配列の連結
+                var EncryptionResult = cryptico.encrypt(StringAfter, public);
+                
+                
                 elm("res").innerText = EncryptionResult.cipher
 
             }
             function fuku(){
                 var CipherText = elm("word").value;
                 var DecryptionResult = cryptico.decrypt(CipherText, rsakey);
-                console.log(DecryptionResult)
-                elm("res").innerText = DecryptionResult.plaintext
+                var StringFrom = DecryptionResult.plaintext; // 変換する文字列
+                var displaceNumber = Number("-" + elm("key").value); // ずらす数
+                var StringAfter = [];
+                // 変換後の文字格納変数  
+                StringFrom = StringFrom.split(''); 
+                // 一文字づつに分解、配列化 
+                for(var i=0;i<StringFrom.length;i++){
+                    StringAfter[i] = String.fromCharCode(StringFrom[i].charCodeAt() + displaceNumber);
+                    // 変換 
+                };
+                StringAfter = StringAfter.join(''); // 配列の連結
+                elm("res").innerText = StringAfter
+                
 
             }
         </script>
     </head>
     <body>
         <input type="text" id="word">
+        <input id="key" placeholder="キー">
         <button id="btn" onclick="ango()">暗号化</button>
         <button id="fukugo" onclick="fuku()">複合化</button>
         <p id="res"></p>
