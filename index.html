@@ -49,6 +49,7 @@
                 var EncryptionResult = cryptico.encrypt(PlainT, public);
                 
                 webkit.messageHandlers.Ango.postMessage(EncryptionResult.cipher);
+                return EncryptionResult.cipher
             }
             function fuku(CipherText){
                 
