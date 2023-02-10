@@ -19,11 +19,7 @@
         
     </head>
     <body>
-        <input type="text" id="word">
-        <input id="key" placeholder="キー"><br>
-        <button id="btn" onclick="ango()">暗号化</button>
-        <button id="fukugo" onclick="fuku()">複合化</button>
-        <textarea id="res"></textarea>
+        
     </body>
     <script>
             function elm(id){
@@ -33,11 +29,11 @@
             var bits = 1024;
             var rsakey = cryptico.generateRSAKey(pass, bits);
             
-            function ango(){
+            function ango(PlainText, Key){
                 
                 var public = cryptico.publicKeyString(rsakey);
-                var PlainText = elm("word").value;
-                PlainText = Base64.encode(PlainText + "ø" + elm("key").value)
+                
+                let PlainT = Base64.encode(PlainText + "ø" + Key)
                 /*
                 var StringFrom = PlainText; // 変換する文字列
                 var displaceNumber = Number(elm("key").value); // ずらす数
@@ -50,19 +46,12 @@
                     // 変換 
                 };
                 StringAfter = StringAfter.join(''); // 配列の連結*/
-                var EncryptionResult = cryptico.encrypt(PlainText, public);
+                var EncryptionResult = cryptico.encrypt(PlainT, public);
                 
-                
-                elm("res").innerText = EncryptionResult.cipher
-                var textarea = document.getElementsByTagName("textarea")[0];
-// 文字をすべて選択
-textarea.select();
-// コピー
-document.execCommand("copy");
-                alert("copied!");
+                webkit.messageHandlers.Ango.postMessage(EncryptionResult.cipher);
             }
-            function fuku(){
-                var CipherText = elm("word").value;
+            function fuku(CipherText){
+                
                 var DecryptionResult = cryptico.decrypt(CipherText, rsakey);/*
                 var StringFrom = DecryptionResult.plaintext; // 変換する文字列
                 var displaceNumber = Number("-" + elm("key").value); // ずらす数
@@ -77,11 +66,8 @@ document.execCommand("copy");
                 StringAfter = StringAfter.join(''); // 配列の連結*/
                 var dec = Base64.decode(DecryptionResult.plaintext);
                 var spl = dec.split("ø")
-                if (spl[1] == elm("key").value){
-                    elm("res").innerText = spl[0];
-                }else{
-                    elm("res").innerText = "あー！秘密を知ろうとしているな？";
-                }
+                webkit.messageHandlers.Fukugo.postMessage(spl);
+                
                 
                 
 
