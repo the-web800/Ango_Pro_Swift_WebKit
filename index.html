@@ -33,7 +33,7 @@
                 
                 var public = cryptico.publicKeyString(rsakey);
                 
-                var PlainT = Base64.encode(PlainText + "ø" + Key)
+                var PlainT = Base64.encode(PlainText + "ø" + Key);
                 /*
                 var StringFrom = PlainText; // 変換する文字列
                 var displaceNumber = Number(elm("key").value); // ずらす数
@@ -49,7 +49,7 @@
                 var EncryptionResult = cryptico.encrypt(PlainT, public);
                 
                 webkit.messageHandlers.Ango.postMessage(EncryptionResult.cipher);
-                return EncryptionResult.cipher
+                return EncryptionResult.cipher;
             }
             function fuku(CipherText){
                 
@@ -66,7 +66,7 @@
                 };
                 StringAfter = StringAfter.join(''); // 配列の連結*/
                 var dec = Base64.decode(DecryptionResult.plaintext);
-                var spl = dec.split("ø")
+                var spl = dec.split("ø");
                 webkit.messageHandlers.Fukugo.postMessage(spl);
                 
                 
